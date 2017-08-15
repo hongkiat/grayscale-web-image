@@ -1,0 +1,34 @@
+body {
+	background-image: url('../img/bg.png'); 
+}
+.demo-wrapper {
+	width: 500px;
+	margin: 0 auto;
+}
+.demo-wrapper section {
+	margin-bottom: 30px;
+	padding-bottom: 30px;
+	border-bottom: 1px solid #eaeaea;
+}
+.demo-wrapper section:last-child {
+	border-bottom: 0;
+}
+.demo-wrapper section h3 {
+	color: #555;
+}
+.demo-wrapper .sidenote {
+	padding: 10px;
+	border: 1px solid #ccc;
+	background-color: #f3f3f3;
+	margin: 10px 0;
+	color: #555;
+	font-size: 12px;
+	border-radius: 3px;
+}
+.demo-wrapper #filter.grayscale img {
+	-webkit-filter: grayscale(1);	
+	filter: gray;
+}
+.demo-wrapper #svg.grayscale img {
+	filter: url('../img/gray.svg#grayscale');
+}

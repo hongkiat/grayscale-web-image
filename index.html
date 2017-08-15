@@ -1,0 +1,78 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>Grayscale Image - Hongkiat.com</title>
+
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+<div class="demo-wrapper">
+
+	<section id="filter" class="grayscale">
+		<h3>Filter</h3>
+		<p class="sidenote">Works in Webkit browser. And in IE6 and earlier version with <code>filter: gray</code></p>
+		<figure>
+			<img src="img/image.jpg" alt="">
+		</figure>
+	</section>
+
+	<section id="javascript" class="grayscale">
+		<p class="sidenote">Works literally in JavaScript-enabled browsers.</p>
+		<h3>JavaScript</h3>
+		<figure>
+			<img id="js-image" src="img/image.jpg" alt="">
+		</figure>
+	</section>
+
+	<section id="svg" class="grayscale">
+		<h3>SVG</h3>
+		<p class="sidenote">Works in Firefox 3.5</p>
+		<figure>
+			<img src="img/image.jpg" alt="">
+		</figure>
+	</section>
+
+</div>
+
+<script>
+var imgObj = document.getElementById('js-image');
+
+function gray(imgObj) {
+    var canvas = document.createElement('canvas');
+    var canvasContext = canvas.getContext('2d');
+    
+    var imgW = imgObj.width;
+    var imgH = imgObj.height;
+    canvas.width = imgW;
+    canvas.height = imgH;
+    
+    canvasContext.drawImage(imgObj, 0, 0);
+    var imgPixels = canvasContext.getImageData(0, 0, imgW, imgH);
+    
+    for(var y = 0; y < imgPixels.height; y++){
+        for(var x = 0; x < imgPixels.width; x++){
+            var i = (y * 4) * imgPixels.width + x * 4;
+            var avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
+            imgPixels.data[i] = avg; 
+            imgPixels.data[i + 1] = avg; 
+            imgPixels.data[i + 2] = avg;
+        }
+    }
+
+    canvasContext.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
+    return canvas.toDataURL();
+}
+
+imgObj.src = gray(imgObj);
+</script>
+
+</body>
+</html>
